@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .app li {
+            display: inline-block;
+
+
+
+        }
+
+        .app li button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 30px;
+            width: 70px;
+        }
+
+        .yin {
+            display: none;
+        }
+
+        .active {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app">
+        <div>
+            <ul>
+                <li v-for="(image,index) in images" :key="image.id">
+                    <button @click="handle(index)">{{image.name}}</button>
+                </li>
+            </ul>
+        </div>
+
+        <div v-for="(image,index) in images" :key="image.id" class="yin" :class="currentIndex===index?'active':''">
+            <img :src="image.path">
+
+        </div>
+    </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        const app = new Vue({
+            data: {
+                currentIndex: 0,
+                images: [{
+                        id: 0,
+                        name: '苹果',
+                        path: './img/1.jpg'
+
+                    },
+                    {
+                        id: 1,
+                        name: '橘子',
+                        path: './img/2.jpg'
+
+                    }, {
+                        id: 2,
+                        name: '香蕉',
+                        path: './img/3.jpg'
+
+                    }
+                ]
+            },
+            methods: {
+                handle: function (index) {
+                    this.currentIndex = index
+                }
+            },
+        }).$mount('.app')
+    </script>
+</body>
+
+</html>
